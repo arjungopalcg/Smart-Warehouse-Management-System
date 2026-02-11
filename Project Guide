@@ -1,0 +1,384 @@
+# Data Analytics & Automation Project Guide
+
+This guide describes the full workflow for the **Smart-Warehouse-Management-System** data analytics and automation project, aligned to a Warehouse & Transport Data Analyst role in logistics.[web:10][web:26]
+
+---
+
+## 1. Project Overview
+
+This project demonstrates the core competencies required for a Warehouse & Transport Data Analyst at Uniserve or similar logistics organisations.[web:10][web:25] It focuses on data cleaning, automation, Power BI reporting, SQL querying, and warehouse/transport operations analysis using a realistic, messy dataset.
+
+### Objectives
+
+- Transform messy, real-world warehouse data into clean, structured datasets.
+- Build automated Power BI dashboards for operational decision-making.
+- Develop SQL queries and ETL processes for data transformation.
+- Identify opportunities for process improvement and automation.
+- Demonstrate understanding of inventory management, stock control, and vehicle routing.[web:10][web:26]
+
+---
+
+## 2. Dataset Overview
+
+The project uses a warehouse management dataset with intentional data quality issues to simulate real-world challenges.[web:10][web:26] It contains **8,650 records** across four key operational areas:
+
+| Dataset   | Records | Description                                                                                  |
+|-----------|---------|----------------------------------------------------------------------------------------------|
+| Inventory | 5,000   | Stock levels, SKUs, warehouse locations, reorder points, supplier information               |
+| Orders    | 3,000   | Customer orders, delivery dates, pricing, status tracking, shipping addresses               |
+| Transport | 500     | Vehicle routing, driver assignments, delivery performance, fuel consumption                 |
+| Suppliers | 150     | Supplier performance, delivery metrics, payment terms, contact information                  |
+
+---
+
+## 3. Data Quality Challenges
+
+The dataset includes realistic issues that require cleaning, standardisation, and validation.[web:20][web:26]
+
+### 3.1 Format Inconsistencies
+
+- Date formats: `YYYY-MM-DD`, `DD/MM/YYYY`, `DD-MM-YYYY`, `YYYY/MM/DD`.
+- Location codes: `A1-2-3` vs `Aisle1/Bay2/Shelf3` vs `A1.2.3`.
+- Warehouse names: `London DC` vs `LONDON DC` vs `London`.
+- Order IDs: `ORD-`, `ORDER`, `O` prefixes.
+- Status fields: mixed case and variants (`Pending`, `PENDING`, `pending`).
+
+### 3.2 Missing Data
+
+- 8% missing unit costs in inventory.
+- 10% missing stock check dates.
+- 5% missing customer names in orders.
+- 15% missing delivery dates.
+- 8% missing driver names in transport data.
+
+### 3.3 Data Errors
+
+- 5% negative stock quantities (system/input errors).
+- ~200 duplicate SKUs simulating manual entry errors.
+- 15% orphaned orders where SKUs are not in inventory.
+- 5% delivery dates earlier than order dates.
+- Vehicle overloading where load exceeds capacity.[web:26]
+
+### 3.4 Inconsistent Calculations
+
+- 30% of orders have inconsistent `Total_Value` vs `Unit_Price × Quantity`.
+- 10% have null `Total_Value` despite populated unit prices.
+
+---
+
+## 4. Suggested Project Tasks
+
+### Phase 1: Data Cleaning & Preparation
+
+- Standardise date formats to `YYYY-MM-DD` using SQL/Python.
+- Normalise warehouse locations to a single code structure.
+- Clean warehouse names via a lookup table and standardised values.
+- Identify and flag duplicate SKUs for review.
+- Handle missing values with imputation strategies or flags.
+- Detect and correct negative stock quantities.
+
+### Phase 2: Data Validation & Quality Rules
+
+- Create validation rules to flag:
+  - Negative stock.
+  - Overloaded vehicles.
+  - Orphaned orders.
+  - Date inconsistencies (delivery before order).
+- Build a data quality dashboard showing error rates and trends.
+- Document data quality metrics and KPIs used to monitor improvements.[web:23]
+
+### Phase 3: SQL & ETL Development
+
+- Write SQL queries to calculate:
+  - Stock turnover.
+  - Reorder recommendations.
+  - Supplier performance.
+  - Vehicle utilisation.[web:20][web:26]
+- Create views or stored procedures for common reporting needs.
+- Develop an ETL pipeline to transform raw data into clean, analysis-ready tables.
+- Design dimension and fact tables to support a warehouse-style data model.[web:23]
+
+### Phase 4: Power BI Dashboard Development
+
+Build interactive dashboards for:
+
+- **Inventory Management**: stock levels, reorder alerts, stock ageing, ABC analysis.
+- **Order Fulfilment**: order status, delivery performance, customer trends, backorders.
+- **Transport Operations**: vehicle utilisation, route efficiency, driver performance, fuel consumption.[web:26]
+- **Supplier Performance**: on-time delivery, quality scores, spend analysis.
+- **Executive Summary**: high-level KPIs, trends, and exceptions requiring attention.[web:20]
+
+### Phase 5: Automation & Process Improvement
+
+- Identify manual reporting processes suitable for automation.
+- Create scheduled data refresh pipelines (e.g., Power BI gateway/Fabric).[web:10]
+- Build automated alerts for critical KPIs (low stock, delayed deliveries, overdue orders).
+- Document process flows and user manuals.
+- Propose data governance and quality standards.
+
+---
+
+## 5. Key Metrics & KPIs
+
+These KPIs reflect common warehouse, transport, and supplier performance measures.[web:20][web:26]
+
+### 5.1 Inventory Metrics
+
+- Stock turnover ratio.
+- Days of inventory on hand.
+- Stock-out rate.
+- Items below reorder point.
+- Obsolete stock value.
+- ABC classification distribution.[web:20][web:26]
+
+### 5.2 Order Fulfilment Metrics
+
+- Order cycle time (order to delivery).
+- On-time delivery percentage.
+- Order accuracy rate.
+- Average order value.
+- Backorder rate.[web:20]
+
+### 5.3 Transport Metrics
+
+- Vehicle utilisation percentage.
+- Cost per delivery.
+- Fuel efficiency (L/km).
+- Delivery delay rate.
+- Deliveries per route.[web:10][web:26]
+
+### 5.4 Supplier Metrics
+
+- On-time delivery rate.
+- Quality score trends.
+- Average lead time.
+- Spend concentration.
+- Supplier reliability score.[web:10][web:20]
+
+---
+
+## 6. Recommended Technologies
+
+- **Power BI**: dashboard creation and visualisation.[web:10]
+- **SQL (SQL Server/PostgreSQL)**: data transformation, validation rules, KPI logic.[web:23]
+- **Python (pandas, openpyxl)**: data cleaning, ETL scripting, automation.
+- **Excel**: initial exploration and ad-hoc analysis.
+- **Microsoft Fabric (optional)**: data lakehouse, pipelines, advanced analytics.[web:10]
+
+---
+
+## 7. Expected Deliverables
+
+- Clean datasets in Excel/CSV format with documented transformations.
+- SQL scripts for cleaning, validation, and metric calculations.
+- Power BI `.pbix` files with multiple report pages.
+- Documentation: data dictionary, process flows, user guides.
+- Recommendations report with insights and improvement opportunities.
+- Data quality dashboard showing before/after metrics.[web:23]
+
+---
+
+## 8. Alignment with Role Requirements
+
+| Role Requirement                     | Project Demonstration                                                                                  |
+|--------------------------------------|--------------------------------------------------------------------------------------------------------|
+| Ensure data accuracy and integrity   | Data cleaning and validation phases resolve format issues, missing fields, and logical errors         |
+| Support Power BI reporting           | Phase 4 delivers operational and executive dashboards                                                 |
+| Develop SQL queries                  | ETL processes and KPIs implemented in SQL/Spark-style queries                                         |
+| Identify automation opportunities    | Phase 5 automates refreshes, alerts, and recurring reports                                            |
+| Stock control/management             | Inventory KPIs: reorder points, turnover, ABC classification                                          |
+| Vehicle planning & routing           | Transport KPIs: utilisation, route efficiency, delivery performance                                   |[web:10][web:26]
+
+---
+
+## 9. Success Criteria
+
+The project is considered successful when:
+
+- Data quality issues are systematically identified, documented, and resolved.
+- Dashboards provide near real-time visibility into warehouse and transport performance.
+- SQL queries produce accurate, efficient metric calculations.
+- ETL processes run reliably and can be scheduled for regular updates.
+- Insights and recommendations are actionable and clearly linked to business value.
+- Documentation enables easy handover and long-term maintenance.[web:23]
+
+---
+
+## 10. Getting Started
+
+1. Open `Warehouse_Management_Raw_Data.xlsx` and review each worksheet.
+2. Document initial observations and data quality concerns.
+3. Start with Phase 1 data cleaning, focusing on high-impact issues.
+4. Create a project timeline and prioritise tasks based on business impact.
+5. Set up a Git branch structure for experiments, cleaning scripts, and dashboard iterations.[web:21][web:24]
+
+---
+
+## 11. Sample Analysis Questions
+
+Use these questions to guide your analysis and storytelling.[web:22][web:25]
+
+### Inventory
+
+- Which products are consistently out of stock?
+- What is the average stock turnover by category?
+- Which warehouse locations have capacity or utilisation issues?
+- What is the optimal reorder point for high-demand items?
+
+### Orders
+
+- What is the average order fulfilment time?
+- Which customers generate the highest order values?
+- What percentage of orders are delayed?
+- How do order patterns vary by weekday or season?
+
+### Transport
+
+- Which routes have the best fuel efficiency?
+- Are any vehicles consistently overloaded?
+- What is the average delay time by driver?
+- Which routes could be optimised for cost or time?
+
+### Suppliers
+
+- Which suppliers have the most reliable delivery performance?
+- Are there quality issues with specific suppliers?
+- How does lead time correlate with on-time delivery?
+- Should suppliers be consolidated to reduce complexity?
+
+---
+
+## 12. Data Dictionary
+
+### 12.1 Inventory Table
+
+- `SKU`: Stock Keeping Unit identifier (inconsistent formats).
+- `Product_Name`: Product description.
+- `Category`: Product category.
+- `Quantity_On_Hand`: Current stock level (may include negative values).
+- `Reorder_Point`: Minimum stock level before reordering.
+- `Reorder_Quantity`: Standard replenishment quantity.
+- `Unit_Cost_GBP`: Cost per unit in GBP (some missing).
+- `Location`: Warehouse location code (inconsistent formats).
+- `Warehouse`: Distribution centre name (inconsistent).
+- `Last_Stock_Check`: Date of last inventory count (mixed formats).
+- `Supplier_ID`: Supplier identifier.
+- `Lead_Time_Days`: Days from order to delivery.
+
+### 12.2 Orders Table
+
+- `Order_ID`: Unique order identifier (inconsistent formats).
+- `Order_Date`: Date order was placed (mixed formats).
+- `Customer_ID`: Customer identifier.
+- `Customer_Name`: Customer company name (some missing).
+- `SKU`: Ordered product (some orphaned).
+- `Quantity_Ordered`: Units ordered.
+- `Unit_Price`: Price per unit (some missing).
+- `Total_Value`: Total order value (inconsistent calculations).
+- `Order_Status`: Current status (mixed case).
+- `Delivery_Date`: Expected/actual delivery date (may precede order date).
+- `Shipping_Address`: Delivery address.
+- `Priority`: Order priority level (inconsistent values).[web:20]
+
+### 12.3 Transport Table
+
+- `Vehicle_ID`: Unique vehicle identifier.
+- `Vehicle_Type`: Type/size of vehicle.
+- `Registration`: UK registration number.
+- `Capacity_KG`: Maximum load capacity (kg).
+- `Current_Load_KG`: Current load (can exceed capacity).
+- `Driver_ID`: Driver identifier.
+- `Driver_Name`: Driver name (some missing).
+- `Route_ID`: Route identifier.
+- `Departure_Time`: Departure timestamp.
+- `Expected_Arrival`: Planned arrival time.
+- `Actual_Arrival`: Actual arrival time (missing for in-transit).
+- `Status`: Current delivery status (mixed case).
+- `Fuel_Consumption_L`: Fuel used (litres).
+- `Distance_KM`: Distance travelled (km).
+- `Delivery_Count`: Number of deliveries on route.[web:26]
+
+### 12.4 Suppliers Table
+
+- `Supplier_ID`: Unique supplier identifier.
+- `Supplier_Name`: Company name.
+- `Contact_Email`: Email address (some missing).
+- `Contact_Phone`: Phone number (inconsistent formats).
+- `On_Time_Delivery_%`: On-time delivery percentage.
+- `Quality_Score_%`: Quality rating percentage.
+- `Lead_Time_Days`: Average delivery time.
+- `Total_Orders_YTD`: Orders year-to-date.
+- `Total_Spend_GBP`: Total spend in GBP.
+- `Last_Order_Date`: Most recent order date (mixed formats).
+- `Payment_Terms`: Payment agreement (inconsistent).
+- `Active_Status`: Active/inactive flag (mixed case).[web:20]
+
+---
+
+## 13. Additional Resources
+
+### 13.1 Useful SQL Patterns
+
+```sql
+-- Find duplicate SKUs
+SELECT SKU, COUNT(*) AS count
+FROM Inventory
+GROUP BY SKU
+HAVING COUNT(*) > 1;
+
+-- Calculate stock turnover (simplified example)
+SELECT 
+    i.Category,
+    SUM(o.Quantity_Ordered) / NULLIF(AVG(i.Quantity_On_Hand), 0) AS Turnover_Ratio
+FROM Inventory i
+JOIN Orders o ON i.SKU = o.SKU
+GROUP BY i.Category;
+
+-- Items below reorder point
+SELECT SKU, Product_Name, Quantity_On_Hand, Reorder_Point
+FROM Inventory
+WHERE Quantity_On_Hand < Reorder_Point;
+
+-- Vehicle utilisation analysis
+SELECT 
+    Vehicle_ID,
+    AVG(Current_Load_KG / NULLIF(Capacity_KG, 0) * 100.0) AS Utilisation_Pct
+FROM Transport
+GROUP BY Vehicle_ID;
+
+### 13.2 Power BI DAX Measures
+text
+-- Stock Out Rate
+Stock Out Rate = 
+DIVIDE(
+    COUNTROWS(FILTER(Inventory, Inventory[Quantity_On_Hand] = 0)),
+    COUNTROWS(Inventory)
+)
+
+-- On-Time Delivery %
+On-Time Delivery % = 
+DIVIDE(
+    COUNTROWS(FILTER(Orders, Orders[Delivery_Date] <= Orders[Expected_Date])),
+    COUNTROWS(Orders)
+)
+
+-- Average Order Value
+Average Order Value = 
+AVERAGE(Orders[Total_Value])
+
+## 14. Tips for Success
+Start simple: prioritise basic data cleaning before advanced analytics.[web:22]
+
+Document everything: keep a log of cleaning rules, assumptions, and decisions.[web:21][web:24]
+
+Validate often: test queries and measures at each stage to catch errors early.
+
+Think business-first: frame findings in terms of operational and financial impact.[web:25]
+
+Use version control: track changes to SQL, Python, and Power BI files in Git.
+
+Create reusable components: parameterised queries, modular scripts, reusable DAX.
+
+Test edge cases: handle nulls, duplicates, outliers, and unexpected formats.
+
+Seek feedback: share dashboards for usability and interpretability reviews.[web:24]
